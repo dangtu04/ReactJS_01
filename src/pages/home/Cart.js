@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { DELETE_ID, GET_ALL, GET_ID, PUT_EDIT } from "../../api/apiService";
 import payment from "../../assets/images/misc/payments.png";
 import { Link } from "react-router-dom";
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const Cart = () => {
   const [cart, setCart] = useState(null);
   const cartId = localStorage.getItem("cartId");
   const userEmail = localStorage.getItem("userEmail");
   const [quantities, setQuantities] = useState({});
-  const imageUrl = "http://localhost:8080/api/public/products/image/";
+  const imageUrl = `${baseURL}/public/products/image/`;
 
 
   // gọi api lấy giỏ hàng

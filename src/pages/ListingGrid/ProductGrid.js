@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GET_ALL } from "../../api/apiService";
 import Menu from "../home/Menu";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const ProductGrid = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -169,7 +169,7 @@ const ProductGrid = () => {
                   <div className="img-wrap">
                     {product.discount != 0 ? <span className="badge badge-danger py-2">- {product.discount}%</span>: ''}
                     <img
-                      src={`http://localhost:8080/api/public/products/image/${product.image}`}
+                      src={`${baseURL}/public/products/image/${product.image}`}
                       alt={product.productName}
                     />
                   </div>

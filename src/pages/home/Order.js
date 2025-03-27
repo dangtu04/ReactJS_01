@@ -3,7 +3,7 @@ import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import { GET_ALL, LOGOUT, POST_ADD } from "../../api/apiService";
 import PrintInvoiceButton from "../print/PrintInvoiceButton";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const Order = () => {
   const userEmail = localStorage.getItem("userEmail");
   const [userId, setUserId] = useState(null);
@@ -18,7 +18,7 @@ const Order = () => {
     ward: "",
   });
   const [orders, setOrder] = useState([]);
-  const imageURL = "http://localhost:8080/api/public/products/image/";
+  const imageURL = `${baseURL}/public/products/image/`;
   const [evaluatingProductId, setEvaluatingProductId] = useState(null);
   const [evaluations, setEvaluations] = useState({});
   // const [reviews, setReviews] = useState([]);

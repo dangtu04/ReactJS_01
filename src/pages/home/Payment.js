@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { GET_ALL, POST_ADD } from "../../api/apiService";
 import { useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const Payment = () => {
   const userEmail = localStorage.getItem("userEmail");
   const cartId = localStorage.getItem("cartId"); 
+
+
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [userData, setUserData] = useState({
     firstName: "",
@@ -202,7 +205,7 @@ const Payment = () => {
                   // console.log(quantities[product.productId])
                   return (
                     <div key={index} className="cart-item">
-                      <img src={`http://localhost:8080/api/public/products/image/${product.image}`} alt={product.productName} className="cart-item-img" />
+                      <img src={`${baseURL}/public/products/image/${product.image}`} alt={product.productName} className="cart-item-img" />
                       <div className="cart-item-info">
                         <h5>{product.productName}</h5>
                         <p>
@@ -275,7 +278,7 @@ const Payment = () => {
             )}
 
             {selectedPayment === "paypal" && (
-            <PayPalScriptProvider options={{ "client-id": "ARxcLHWljIWWc68PBhJRKXZy6D1QmuPl_yga2sL5LnDPBq8EWRcoaTuMVyZN5Uh0NUkApxsWuWd1UoRk" }}>
+            <PayPalScriptProvider options={{ "client-id": process.env.REACT_APP_KEY_PAYPAL }}>
             <PayPalButtons
               createOrder={(data, actions) => {
                 return actions.order.create({

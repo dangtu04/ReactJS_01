@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosConfig";
-
+const API_URL = process.env.REACT_APP_BASE_API_URL;
 function callApi(endpoint, method = "GET", body, params) {
   const token = localStorage.getItem("authToken");
 
@@ -14,10 +14,8 @@ function callApi(endpoint, method = "GET", body, params) {
       Authorization: token ? `Bearer ${token}` : undefined,
     },
     data: body ? JSON.stringify(body) : null,
-    
   };
   // console.log("Headers gửi đi: ", config.headers);
-
 
   // console.log("callApi url: ", url);
   // console.log("callApi token: ", token);
@@ -28,7 +26,6 @@ function callApi(endpoint, method = "GET", body, params) {
       console.error("API call error:", error);
       throw error;
     });
-    
 }
 export function GET_ALL(endpoint, params) {
   return callApi(endpoint, "GET", null, params);
@@ -51,9 +48,8 @@ export function DELETE_ID(endpoint) {
 }
 
 export function LOGIN(body) {
-  const API_URL_LOGIN = "http://localhost:8080/api/login";
   return axiosInstance
-    .post(API_URL_LOGIN, body, {
+    .post(`${API_URL}/login`, body, {
       headers: {
         accept: "*/*",
         "Content-Type": "application/json",
@@ -66,24 +62,14 @@ export function LOGIN(body) {
     });
 }
 
-export function LOGOUT() {
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("hasRedirected");
-  localStorage.removeItem("cartId");
-  localStorage.removeItem("userEmail");
-  localStorage.removeItem("userId");
-  window.location.href = "/Login";
-}
-
-// ../api/apiService.js
 export const REGISTER = async (payload) => {
   try {
-    const response = await fetch("http://localhost:8080/api/register", {
+    const response = await fetch(`${API_URL}/register`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
@@ -96,3 +82,12 @@ export const REGISTER = async (payload) => {
     throw error;
   }
 };
+
+export function LOGOUT() {
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("hasRedirected");
+  localStorage.removeItem("cartId");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userId");
+  window.location.href = "/Login";
+}

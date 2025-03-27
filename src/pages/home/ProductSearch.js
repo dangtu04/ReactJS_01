@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { GET_ALL } from "../../api/apiService";
 import Menu from "./Menu";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 function ProductSearch() {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("keyword") || "";
@@ -51,7 +51,7 @@ function ProductSearch() {
                         </span>
                       )}
                       <img
-                        src={`http://localhost:8080/api/public/products/image/${product.image}`}
+                        src={`${baseURL}/public/products/image/${product.image}`}
                         alt={product.productName}
                       />
                     </div>

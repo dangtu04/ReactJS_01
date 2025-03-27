@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_ALL } from "../../api/apiService";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const Slider = () => {
   const [banners, setBanners] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
@@ -19,7 +19,7 @@ const Slider = () => {
   const fetchBannerImage = async (fileName, id) => {
     const token = localStorage.getItem("authToken");
     try {
-      const response = await fetch(`http://localhost:8080/api/public/banners/image/${fileName}`, {
+      const response = await fetch(`${baseURL}/public/banners/image/${fileName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

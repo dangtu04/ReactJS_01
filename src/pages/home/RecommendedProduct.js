@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import items1 from "../../assets/images/items/1.jpg";
 import { GET_ALL } from "../../api/apiService";
 import { Link } from "react-router-dom";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const RecommendedProduct = () => {
   const [products, setProducts] = useState([]);
-  const imageURL = "http://localhost:8080/api/public/products/image/";
+  const imageURL = `${baseURL}/public/products/image/`;
   useEffect(() => {
     GET_ALL(`products?pageNumber=0&pageSize=12&sortBy=productId&sortOrder=asc`)
       .then((response) => {

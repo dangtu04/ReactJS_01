@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { GET_ALL } from "../../api/apiService";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
-  const imageURL = `http://localhost:8080/api/public/brands/image/`;
+  const imageURL = `${baseURL}/public/brands/image/`;
   useEffect(() => {
     GET_ALL(`brands`)
       .then((response) => {
@@ -23,7 +23,7 @@ const Brands = () => {
     const token = localStorage.getItem("authToken");
     try {
       const response = await fetch(
-        `http://localhost:8080/api/public/brands/image/${fileName}`,
+        `${baseURL}/public/brands/image/${fileName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -3,12 +3,12 @@ import { GET_ALL } from "../../api/apiService";
 import { Link } from "react-router-dom";
 import startsActive from "../../assets/images/icons/stars-active.svg";
 import startsDisable from "../../assets/images/icons/starts-disable.svg";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const ProductByCategory = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const imageURL = "http://localhost:8080/api/public/products/image/";
+  const imageURL = `${baseURL}/public/products/image/`;
   useEffect(() => {
     GET_ALL("categories", {})
       .then((response) => {

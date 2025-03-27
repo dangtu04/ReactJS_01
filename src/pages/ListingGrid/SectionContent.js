@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { GET_ALL, GET_ID } from "../../api/apiService";
 import Menu from "../home/Menu";
-
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const SectionContent = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({ categoryName: "Tất cả sản phẩm" });
@@ -130,7 +130,7 @@ const SectionContent = () => {
                                <div className="img-wrap">
                                  {product.discount != 0 ? <span className="badge badge-danger py-2">- {product.discount}%</span>: ''}
                                  <img
-                                   src={`http://localhost:8080/api/public/products/image/${product.image}`}
+                                   src={`${baseURL}/public/products/image/${product.image}`}
                                    alt={product.productName}
                                  />
                                </div>

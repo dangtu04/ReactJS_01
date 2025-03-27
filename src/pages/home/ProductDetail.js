@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { DELETE_ID, GET_ALL, GET_ID, POST_ADD, PUT_EDIT } from "../../api/apiService";
 import Menu from "./Menu";
 import DefaultAvt from "../../assets/images/avatars/default-avata.jpg";
+const baseURL = process.env.REACT_APP_BASE_API_URL
 const ProductDetail = () => {
   const { productId } = useParams();
   const [products, setProducts] = useState(null);
@@ -150,7 +151,7 @@ const ProductDetail = () => {
                 <article className="gallery-wrap">
                   <div className="img-big-wrap">
                     <img
-                      src={`http://localhost:8080/api/public/products/image/${products.image}`}
+                      src={`${baseURL}/public/products/image/${products.image}`}
                     />
                   </div>
                 </article>
